@@ -25,4 +25,5 @@ class MyText {
   static const userid = "Userid";
   static const foto = "Foto";
   static const selesai = "Selesai";
+  static const ajukan = "Ajukan";
 }

@@ -1,38 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/components/bottom_sheet.dart';
-import 'package:frontend/components/button.dart';
 import 'package:frontend/components/card.dart';
 import 'package:frontend/components/divider.dart';
 import 'package:frontend/components/search.dart';
-import 'package:frontend/components/show_my_snackbar.dart';
 import 'package:frontend/constant/colors.dart';
 import 'package:frontend/constant/text_style.dart';
 import 'package:frontend/controller/any/any.dart';
 import 'package:frontend/model/view_setting.dart';
 import 'package:iconsax/iconsax.dart';
 
-class ShiftApprovalComponent extends StatefulWidget {
-  const ShiftApprovalComponent({super.key});
+class ShiftSwapHistoryComponent extends StatefulWidget {
+  const ShiftSwapHistoryComponent({super.key});
 
   @override
-  State<ShiftApprovalComponent> createState() => _ShiftApprovalComponentState();
+  State<ShiftSwapHistoryComponent> createState() =>
+      _ShiftSwapHistoryComponentState();
 }
 
-class _ShiftApprovalComponentState extends State<ShiftApprovalComponent> {
+class _ShiftSwapHistoryComponentState extends State<ShiftSwapHistoryComponent> {
   @override
   void initState() {
     super.initState();
-    context.read<ViewSettingCubit>().setSetting(
-          ViewSetting(padding: const EdgeInsets.all(0)),
-        );
-  }
-
-  void showConfirm() {
-    MyBottomSheet(context).showConfirmSheet(
-      onConfirm: () {},
-      onReject: () {},
-    );
+    context
+        .read<ViewSettingCubit>()
+        .setSetting(ViewSetting(padding: const EdgeInsets.all(0)));
   }
 
   @override
@@ -41,15 +32,15 @@ class _ShiftApprovalComponentState extends State<ShiftApprovalComponent> {
       children: [
         Search(
           margin: const EdgeInsets.fromLTRB(15, 10, 15, 15),
-          searchText: "Cari nama",
         ),
         Expanded(
           child: ListView.builder(
-            padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             itemBuilder: (context, index) => MyCard(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-              margin: const EdgeInsets.only(bottom: 15),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.only(bottom: 20),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,31 +49,27 @@ class _ShiftApprovalComponentState extends State<ShiftApprovalComponent> {
                         children: [
                           Icon(
                             Iconsax.calendar_1,
-                            color: MyColor.textFaded.shade400,
                             size: 20,
+                            color: MyColor.textFaded.shade400,
                           ),
                           const SizedBox(
                             width: 10,
                           ),
                           Text(
-                            "Rabu, 02 Mei 2023",
-                            style: TextStyle(
-                              fontSize: MyTextStyle.small,
+                            "${(index + 1).toString().padLeft(2, '0')} Juni 2023",
+                            style: const TextStyle(
                               fontWeight: MyTextStyle.bold,
-                              color: MyColor.textFaded.shade700,
                             ),
-                          )
+                          ),
                         ],
                       ),
-                      if (index.isEven && index % 2 == 0)
-                        Text(
-                          "Diterima",
-                          style: TextStyle(
-                            color: MyColor.green,
+                      Text(
+                        index.isEven ? "Diterima" : "Ditolak",
+                        style: TextStyle(
                             fontSize: MyTextStyle.tiny,
-                            fontWeight: MyTextStyle.bold,
-                          ),
-                        )
+                            color: index.isEven ? MyColor.green : MyColor.red,
+                            fontWeight: MyTextStyle.bold),
+                      ),
                     ],
                   ),
                   const Mydivider(),
@@ -92,30 +79,24 @@ class _ShiftApprovalComponentState extends State<ShiftApprovalComponent> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      shiftComponent("Pegawai X", "07.00 - 16.00"),
+                      //my shift
+                      shiftComponent("Saya", "07.00 - 16.00"),
+                      //swap icon
                       MyCard(
                         padding: const EdgeInsets.all(5),
                         child: Icon(
                           Iconsax.repeat,
-                          size: 20,
-                          color: MyColor.textFaded.shade700,
-                          grade: 30,
+                          size: 18,
+                          color: MyColor.textFaded.shade600,
                         ),
                       ),
-                      shiftComponent("Pegawai Y", "15.00 - 21.00"),
+                      //requested user
+                      shiftComponent("Pegawai x", "15.00 - 22.00")
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
-                  ),
-                  if (index.isOdd)
-                    Btn(
-                      text: "Konfirmasi",
-                      backgroundColor: MyColor.primary,
-                      onPressed: () => showConfirm(),
-                      textColor: MyColor.base,
-                      height: 35,
-                    )
+                    height: 15,
+                  )
                 ],
               ),
             ),

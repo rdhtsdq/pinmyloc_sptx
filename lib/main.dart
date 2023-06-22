@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SelectedCubit(),
         ),
+        BlocProvider(
+          create: (context) => ViewSettingCubit(),
+        )
       ],
       child: MaterialApp(
         title: 'Pinmyloc',

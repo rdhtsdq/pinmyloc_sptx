@@ -7,12 +7,21 @@ class Search extends StatelessWidget {
   String? searchText;
   Function(String val)? onSubmitted;
   TextEditingController? controller;
-  Search({super.key, this.searchText, this.controller, this.onSubmitted});
+  EdgeInsetsGeometry? padding;
+  EdgeInsetsGeometry? margin;
+  Search(
+      {super.key,
+      this.searchText,
+      this.controller,
+      this.onSubmitted,
+      this.margin,
+      this.padding});
 
   @override
   Widget build(BuildContext context) {
     return MyCard(
-      margin: const EdgeInsets.only(bottom: 15),
+      margin: margin ?? const EdgeInsets.only(bottom: 15),
+      padding: padding,
       radius: 7,
       child: TextField(
         onSubmitted: onSubmitted,

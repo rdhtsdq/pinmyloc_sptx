@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/components/card.dart';
 import 'package:frontend/components/divider.dart';
 import 'package:frontend/constant/colors.dart';
 import 'package:frontend/constant/text_style.dart';
+import 'package:frontend/controller/any/any.dart';
+import 'package:frontend/model/view_setting.dart';
 import 'package:iconsax/iconsax.dart';
 
 class EventComponent extends StatelessWidget {
@@ -10,6 +13,12 @@ class EventComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<ViewSettingCubit>().setSetting(
+          ViewSetting(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          ),
+        );
+
     return ListView(
       clipBehavior: Clip.none,
       children: [
@@ -25,12 +34,12 @@ class EventComponent extends StatelessWidget {
                   children: [
                     Icon(
                       Iconsax.calendar_1,
-                      color: MyColor.textFaded.shade700,
+                      color: MyColor.textFaded.shade600,
+                      size: 20,
                     ),
                     Text(
-                      "Januari 2023",
+                      "${(index + 1).toString().padLeft(2, '0')} 2023",
                       style: TextStyle(
-                        fontSize: MyTextStyle.subTitle3,
                         fontWeight: MyTextStyle.bold,
                       ),
                     ),

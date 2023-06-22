@@ -36,3 +36,38 @@ class MyButton extends StatelessWidget {
     );
   }
 }
+
+@immutable
+class Btn extends StatelessWidget {
+  Color? backgroundColor;
+  Color? textColor;
+  String text;
+  Function()? onPressed;
+  double? height;
+
+  Btn(
+      {super.key,
+      this.backgroundColor,
+      this.textColor,
+      required this.text,
+      this.onPressed,
+      this.height});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: backgroundColor,
+        minimumSize: Size.fromHeight(height ?? 40),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(color: textColor),
+      ),
+    );
+  }
+}

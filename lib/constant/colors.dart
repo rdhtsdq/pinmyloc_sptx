@@ -13,7 +13,7 @@ class MyColor {
 
   static const green = Colors.green;
   static const accent = Colors.blue;
-  static final red = Colors.red.shade300;
+  static final red = Colors.red.shade400;
 
   static const trans = Colors.transparent;
 }
