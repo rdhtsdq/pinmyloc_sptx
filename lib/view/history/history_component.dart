@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:frontend/components/card.dart';
 import 'package:frontend/components/divider.dart';
 import 'package:frontend/constant/colors.dart';
 import 'package:frontend/constant/text_style.dart';
 import 'package:frontend/controller/any/any.dart';
 import 'package:frontend/model/view_setting.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:flutter_dash/flutter_dash.dart';
 
 class HistoryComponents extends StatefulWidget {
   const HistoryComponents({super.key});
@@ -51,6 +52,8 @@ class _HistoryComponentsState extends State<HistoryComponents> {
             child: ListView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           itemBuilder: (context, index) => MyCard(
+            color: Colors.transparent,
+            noShadow: true,
             padding: const EdgeInsets.all(10),
             margin: const EdgeInsets.only(bottom: 10),
             child: Column(
@@ -68,59 +71,95 @@ class _HistoryComponentsState extends State<HistoryComponents> {
                     ),
                     Text(
                       "${(index + 1).toString().padLeft(2, '0')} Juni 2023",
-                      style: TextStyle(
-                        fontWeight: MyTextStyle.bold,
+                      style: const TextStyle(
                         fontSize: MyTextStyle.small,
                       ),
                     )
                   ],
                 ),
                 const Mydivider(),
-                const SizedBox(
-                  height: 15,
-                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    section(
-                      Icon(
-                        Iconsax.login_14,
-                        color: MyColor.primary.shade400,
+                    MyCard(
+                      noShadow: true,
+                      color: Colors.indigo.shade50,
+                      padding: const EdgeInsets.all(10),
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Row(
+                        children: [
+                          timeliner(context),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              section(
+                                Icon(
+                                  Iconsax.login_14,
+                                  color: MyColor.primary.shade400,
+                                ),
+                                "Masuk",
+                                "08.00",
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              section(
+                                Icon(
+                                  Iconsax.logout_14,
+                                  color: MyColor.accent.shade400,
+                                ),
+                                "Keluar",
+                                "17.30",
+                              )
+                            ],
+                          ),
+                        ],
                       ),
-                      "Masuk",
-                      "08.00",
                     ),
-                    section(
-                      Icon(
-                        Iconsax.logout_14,
-                        color: MyColor.primary.shade400,
+                    // SizedBox(
+                    //   width: MediaQuery.of(context).size.width * 0.3,
+                    // ),
+                    MyCard(
+                      noShadow: true,
+                      color: MyColor.accent.shade50,
+                      padding: const EdgeInsets.all(10),
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Row(
+                        children: [
+                          timeliner(context),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              section(
+                                Icon(
+                                  Iconsax.arrow_circle_left,
+                                  color: MyColor.primary.shade400,
+                                ),
+                                "Istirahat",
+                                "12.00",
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              section(
+                                  Icon(
+                                    Iconsax.arrow_circle_right,
+                                    color: MyColor.accent.shade400,
+                                  ),
+                                  "Selesai",
+                                  "13.00")
+                            ],
+                          ),
+                        ],
                       ),
-                      "Keluar",
-                      "17.30",
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    section(
-                      Icon(
-                        Iconsax.arrow_circle_left,
-                        color: MyColor.accent.shade400,
-                      ),
-                      "Istirahat",
-                      "12.00",
                     ),
-                    section(
-                        Icon(
-                          Iconsax.arrow_circle_right,
-                          color: MyColor.accent.shade400,
-                        ),
-                        "Selesai",
-                        "13.00")
                   ],
                 ),
               ],
@@ -132,31 +171,57 @@ class _HistoryComponentsState extends State<HistoryComponents> {
     );
   }
 
-  Widget section(Widget icon, String title, String body) {
-    return Row(
+  Column timeliner(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        icon,
-        const SizedBox(
-          width: 10,
+        Icon(
+          Icons.circle_rounded,
+          size: 10,
+          color: MyColor.green,
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontWeight: MyTextStyle.semiBold,
-                fontSize: MyTextStyle.small,
-              ),
-            ),
-            Text(
-              body,
-              style: TextStyle(
-                color: MyColor.textFaded.shade600,
-              ),
-            ),
-          ],
-        )
+        Dash(
+          dashThickness: 1,
+          dashColor: MyColor.textFaded.shade400,
+          direction: Axis.vertical,
+          length: 50,
+          dashGap: 3,
+          dashLength: 2,
+        ),
+        // SizedBox(
+        //   height: ,
+        //   child: VerticalDivider(
+        //     thickness: 1,
+        //   ),
+        // ),
+        Icon(
+          Icons.circle_rounded,
+          size: 10,
+          color: MyColor.red,
+        ),
+      ],
+    );
+  }
+
+  Widget section(Widget icon, String title, String body) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            color: MyColor.textFaded.shade600,
+            fontSize: MyTextStyle.tiny,
+          ),
+        ),
+        Text(
+          body,
+          style: TextStyle(
+            fontSize: MyTextStyle.subTitle3,
+            fontWeight: MyTextStyle.semiBold,
+          ),
+        ),
       ],
     );
   }

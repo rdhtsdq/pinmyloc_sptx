@@ -4,6 +4,7 @@ import 'package:frontend/constant/colors.dart';
 import 'package:frontend/constant/text.dart';
 import 'package:frontend/constant/text_style.dart';
 import 'package:frontend/view/login/login_view.dart';
+import 'package:frontend/view/main_view.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class Splash extends StatelessWidget {
@@ -16,7 +17,7 @@ class Splash extends StatelessWidget {
         (value) => Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => LoginView(),
+              builder: (context) => MainView(),
             ),
             (route) => false),
       );

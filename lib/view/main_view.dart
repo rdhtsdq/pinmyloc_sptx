@@ -9,6 +9,8 @@ import 'package:frontend/model/view_setting.dart';
 import 'package:frontend/view/dashboard/dashboard_component.dart';
 import 'package:frontend/view/event/event.dart';
 import 'package:frontend/view/history/history_component.dart';
+import 'package:frontend/view/service/service_approval_component.dart';
+import 'package:frontend/view/service/service_component.dart';
 import 'package:frontend/view/service/service_history_component.dart';
 import 'package:frontend/view/shift/shift_approval_component.dart';
 import 'package:frontend/view/shift/shift_component.dart';
@@ -60,7 +62,7 @@ class _MainViewState extends State<MainView> {
           ),
           body: Padding(
             padding: state.padding ?? const EdgeInsets.fromLTRB(15, 15, 15, 15),
-            child: HistoryComponents(),
+            child: ServiceApprovalComponents(),
           ),
           floatingActionButton: state.fabAction != null
               ? FloatingActionButton(
