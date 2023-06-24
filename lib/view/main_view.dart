@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:frontend/components/card.dart';
 import 'package:frontend/constant/colors.dart';
 import 'package:frontend/constant/text.dart';
 import 'package:frontend/constant/text_style.dart';
 import 'package:frontend/controller/any/any.dart';
 import 'package:frontend/model/view_setting.dart';
-import 'package:frontend/view/dashboard/dashboard_component.dart';
-import 'package:frontend/view/event/event.dart';
-import 'package:frontend/view/history/history_component.dart';
-import 'package:frontend/view/service/service_approval_component.dart';
 import 'package:frontend/view/service/service_component.dart';
-import 'package:frontend/view/service/service_history_component.dart';
-import 'package:frontend/view/shift/shift_approval_component.dart';
-import 'package:frontend/view/shift/shift_component.dart';
-import 'package:frontend/view/shift/shift_swap_history_component.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -62,14 +55,31 @@ class _MainViewState extends State<MainView> {
           ),
           body: Padding(
             padding: state.padding ?? const EdgeInsets.fromLTRB(15, 15, 15, 15),
-            child: ServiceApprovalComponents(),
+            child: ServiceComponent(),
           ),
-          floatingActionButton: state.fabAction != null
-              ? FloatingActionButton(
-                  onPressed: () => state.fabAction?.call(),
-                  child: state.fabChild,
+          floatingActionButton: state.isHead
+              ? ExpandableFab(
+                  children: state.children ?? [],
+                  backgroundColor: MyColor.primary,
+                  child: state.fabChild ?? const SizedBox(),
+                  type: ExpandableFabType.up,
+                  distance: 70,
                 )
-              : null,
+              : state.fabAction != null
+                  ? state.fabChild is Text
+                      ? FloatingActionButton.extended(
+                          onPressed: () => state.fabAction?.call(),
+                          label: state.fabChild ?? const Text(""),
+                          backgroundColor: MyColor.primary,
+                        )
+                      : FloatingActionButton(
+                          onPressed: () => state.fabAction?.call(),
+                          child: state.fabChild,
+                          backgroundColor: MyColor.primary,
+                        )
+                  : null,
+          floatingActionButtonLocation:
+              state.isHead ? ExpandableFab.location : null,
           endDrawer: Drawer(
             surfaceTintColor: MyColor.base,
             backgroundColor: MyColor.base,

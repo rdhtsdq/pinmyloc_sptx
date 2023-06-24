@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/components/button.dart';
 import 'package:frontend/constant/text_style.dart';
 import '../../constant/colors.dart';
-import '../../constant/size.dart';
 
 class MyBottomSheet {
   BuildContext context;
@@ -16,18 +15,21 @@ class MyBottomSheet {
       enableDrag: true,
       isDismissible: isDismissible,
       backgroundColor: Colors.transparent,
-      builder: (context) => FractionallySizedBox(
-          heightFactor: 0.98,
-          child: Container(
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
-                color: MyColor.base),
-            padding: const EdgeInsets.all(10),
-            child: child,
-          )),
+      builder: (context) => Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: FractionallySizedBox(
+            heightFactor: 0.98,
+            child: Container(
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                  ),
+                  color: MyColor.base),
+              padding: const EdgeInsets.all(10),
+              child: child,
+            )),
+      ),
     );
   }
 
@@ -37,15 +39,18 @@ class MyBottomSheet {
       isDismissible: isDismissible,
       backgroundColor: Colors.transparent,
       enableDrag: true,
-      builder: (context) => Container(
-        decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
-            ),
-            color: MyColor.base),
-        padding: const EdgeInsets.all(10.0),
-        child: child,
+      builder: (context) => Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15),
+              ),
+              color: MyColor.base),
+          padding: const EdgeInsets.all(10.0),
+          child: child,
+        ),
       ),
     );
   }
@@ -58,18 +63,21 @@ class MyBottomSheet {
       enableDrag: true,
       isDismissible: isDismissible,
       backgroundColor: Colors.transparent,
-      builder: (context) => FractionallySizedBox(
-        heightFactor: heightFactor,
-        child: Container(
-          decoration: const BoxDecoration(
-            color: MyColor.base,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
+      builder: (context) => Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: FractionallySizedBox(
+          heightFactor: heightFactor,
+          child: Container(
+            decoration: const BoxDecoration(
+              color: MyColor.base,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15),
+              ),
             ),
+            padding: const EdgeInsets.all(10.0),
+            child: child,
           ),
-          padding: const EdgeInsets.all(10.0),
-          child: child,
         ),
       ),
     );

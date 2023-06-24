@@ -5,6 +5,15 @@ class ViewSetting {
   Function()? refresh;
   Widget? fabChild;
   EdgeInsetsGeometry? padding;
+  bool isHead;
+  List<Widget>? children;
 
-  ViewSetting({this.fabAction, this.refresh, this.fabChild, this.padding});
+  ViewSetting({
+    this.fabAction,
+    this.refresh,
+    this.fabChild,
+    this.padding,
+    this.isHead = false,
+    this.children,
+  });
 }

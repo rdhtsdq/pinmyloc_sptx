@@ -17,14 +17,56 @@ class ServiceComponent extends StatefulWidget {
 }
 
 class _ServiceComponentState extends State<ServiceComponent> {
+  ViewSetting setting = ViewSetting(
+      padding: const EdgeInsets.all(0),
+      fabChild: const Icon(
+        Iconsax.add,
+        size: 26,
+        color: MyColor.base,
+      ),
+      isHead: true,
+      children: [
+        Row(
+          children: [
+            const Text(
+              "Ajukan Dinas Pegawai",
+              style: TextStyle(fontSize: MyTextStyle.tiny),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            FloatingActionButton(
+              onPressed: () {},
+              backgroundColor: MyColor.primary,
+              child: const Icon(
+                Iconsax.people,
+                color: MyColor.base,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            const Text(
+              "Ajukan Dinas",
+              style: TextStyle(fontSize: MyTextStyle.tiny),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            FloatingActionButton(
+              onPressed: () {},
+              backgroundColor: MyColor.primary,
+              child: const Icon(Iconsax.edit, color: MyColor.base),
+            ),
+          ],
+        ),
+      ]);
+
   @override
   void initState() {
     super.initState();
-    context.read<ViewSettingCubit>().setSetting(
-          ViewSetting(
-            padding: const EdgeInsets.all(0),
-          ),
-        );
+    context.read<ViewSettingCubit>().setSetting(setting);
   }
 
   @override

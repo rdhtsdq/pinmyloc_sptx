@@ -11,7 +11,8 @@ class MyTextInput {
       Function(String)? onChanged,
       Function(String)? onSubmitted,
       bool? show,
-      Widget? suffixIcon}) {
+      Widget? suffixIcon,
+      TextInputType keyboardType = TextInputType.text}) {
     return MyCard(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 5),
@@ -22,6 +23,7 @@ class MyTextInput {
         onSubmitted: onSubmitted,
         maxLines: maxLine,
         controller: _controller,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
           hintText: hint,
           suffixIcon: suffixIcon,
