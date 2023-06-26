@@ -24,7 +24,9 @@ class _ShiftApprovalComponentState extends State<ShiftApprovalComponent> {
   void initState() {
     super.initState();
     context.read<ViewSettingCubit>().setSetting(
-          ViewSetting(padding: const EdgeInsets.all(0)),
+          ViewSetting(
+            padding: const EdgeInsets.all(0),
+          ),
         );
   }
 
@@ -40,7 +42,7 @@ class _ShiftApprovalComponentState extends State<ShiftApprovalComponent> {
     return Column(
       children: [
         Search(
-          margin: const EdgeInsets.fromLTRB(15, 10, 15, 15),
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           searchText: "Cari nama",
         ),
         Expanded(

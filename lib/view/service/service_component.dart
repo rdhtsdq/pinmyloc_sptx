@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/components/bottom_sheet.dart';
+import 'package:frontend/components/button.dart';
 import 'package:frontend/components/card.dart';
 import 'package:frontend/components/divider.dart';
+import 'package:frontend/components/my_text_input.dart';
 import 'package:frontend/components/search.dart';
 import 'package:frontend/constant/colors.dart';
 import 'package:frontend/constant/text_style.dart';
 import 'package:frontend/controller/any/any.dart';
 import 'package:frontend/model/view_setting.dart';
 import 'package:iconsax/iconsax.dart';
+
+enum ServiceFormType { employee, head }
 
 class ServiceComponent extends StatefulWidget {
   const ServiceComponent({super.key});
@@ -17,55 +22,67 @@ class ServiceComponent extends StatefulWidget {
 }
 
 class _ServiceComponentState extends State<ServiceComponent> {
-  ViewSetting setting = ViewSetting(
-      padding: const EdgeInsets.all(0),
-      fabChild: const Icon(
-        Iconsax.add,
-        size: 26,
-        color: MyColor.base,
-      ),
-      isHead: true,
-      children: [
-        Row(
-          children: [
-            const Text(
-              "Ajukan Dinas Pegawai",
-              style: TextStyle(fontSize: MyTextStyle.tiny),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            FloatingActionButton(
-              onPressed: () {},
-              backgroundColor: MyColor.primary,
-              child: const Icon(
-                Iconsax.people,
-                color: MyColor.base,
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            const Text(
-              "Ajukan Dinas",
-              style: TextStyle(fontSize: MyTextStyle.tiny),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            FloatingActionButton(
-              onPressed: () {},
-              backgroundColor: MyColor.primary,
-              child: const Icon(Iconsax.edit, color: MyColor.base),
-            ),
-          ],
-        ),
-      ]);
+  late MyBottomSheet sheet;
+
+  late ViewSetting setting;
 
   @override
   void initState() {
     super.initState();
+    sheet = MyBottomSheet(context);
+    setting = ViewSetting(
+        padding: const EdgeInsets.all(0),
+        fabChild: const Icon(
+          Iconsax.add,
+          size: 26,
+          color: MyColor.base,
+        ),
+        isHead: true,
+        children: [
+          Row(
+            children: [
+              const Text(
+                "Ajukan Dinas Pegawai",
+                style: TextStyle(fontSize: MyTextStyle.tiny),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  sheet.showFullSheet(
+                    buildForm(ServiceFormType.head),
+                  );
+                },
+                backgroundColor: MyColor.primary,
+                child: const Icon(
+                  Iconsax.people,
+                  color: MyColor.base,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              const Text(
+                "Ajukan Dinas",
+                style: TextStyle(fontSize: MyTextStyle.tiny),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  sheet.showFullSheet(
+                    buildForm(ServiceFormType.employee),
+                  );
+                },
+                backgroundColor: MyColor.primary,
+                child: const Icon(Iconsax.edit, color: MyColor.base),
+              ),
+            ],
+          ),
+        ]);
     context.read<ViewSettingCubit>().setSetting(setting);
   }
 
@@ -123,12 +140,12 @@ class _ServiceComponentState extends State<ServiceComponent> {
                   ),
                   buildSubComponent(Iconsax.location,
                       text: "Lokasi Dinas , alamat detailnya"),
-                  buildSubComponent(Iconsax.document4,
-                      text: "Alasan Dinas , ketemu siapa "),
+                  buildSubComponent(Iconsax.profile_circle,
+                      text: "Bertemu siapa"),
+                  buildSubComponent(Iconsax.document4, text: "Alasan Dinas "),
                   const SizedBox(
                     height: 5,
                   ),
-                  buildSubComponent(Iconsax.moneys, text: "Rp.x.xxx.xxx"),
                   buildSubComponent(
                     Iconsax.folder_2,
                     child: GestureDetector(
@@ -176,6 +193,73 @@ class _ServiceComponentState extends State<ServiceComponent> {
                   fontSize: MyTextStyle.small,
                 ),
               )
+        ],
+      ),
+    );
+  }
+
+  Widget buildForm(ServiceFormType type) {
+    MyTextInput reason = MyTextInput();
+    MyTextInput person = MyTextInput();
+    MyTextInput address = MyTextInput();
+    MyTextInput budget = MyTextInput();
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (type == ServiceFormType.head)
+            const Text(
+              "Ajukan Dinas Pegawai",
+              style: TextStyle(fontSize: MyTextStyle.subTitle3),
+            )
+          else
+            const Text(
+              "Ajukan Dinas",
+              style: TextStyle(fontSize: MyTextStyle.subTitle3),
+            ),
+          const SizedBox(
+            height: 10,
+          ),
+          if (type == ServiceFormType.head)
+            MyCard(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+              margin: const EdgeInsets.only(bottom: 15),
+              width: MediaQuery.of(context).size.width,
+              child: Text(
+                "Pilih Pegawai",
+                style: TextStyle(color: MyColor.textFaded.shade700),
+              ),
+            ),
+          MyCard(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+            margin: const EdgeInsets.only(bottom: 15),
+            width: MediaQuery.of(context).size.width,
+            child: Text(
+              "Pilih Kota",
+              style: TextStyle(color: MyColor.textFaded.shade700),
+            ),
+          ),
+          address.renderField(context,
+              hint: "Alamat Lengkap",
+              margin: const EdgeInsets.only(bottom: 15)),
+          person.renderField(context,
+              hint: "Bertemu dengan",
+              margin: const EdgeInsets.only(bottom: 15)),
+          if (type == ServiceFormType.head)
+            budget.renderField(
+              context,
+              hint: "Anggaran",
+              margin: const EdgeInsets.only(bottom: 15),
+            ),
+          reason.renderField(
+            context,
+            hint: "Alasan",
+            maxLine: 5,
+            margin: const EdgeInsets.only(bottom: 15),
+          ),
+          Btn(
+            text: "Ajukan",
+          )
         ],
       ),
     );

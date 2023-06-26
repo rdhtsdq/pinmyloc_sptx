@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:frontend/constant/colors.dart';
-import 'package:frontend/controller/any/any.dart';
-import 'package:frontend/controller/bloc/login_bloc.dart';
-import 'package:frontend/view/login/login_view.dart';
-import 'package:frontend/view/splash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import './constant/colors.dart';
+import './controller/any/any.dart';
+import './controller/bloc/login_bloc.dart';
+import './view/login/login_view.dart';
+import './view/splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ViewSettingCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ViewCubit(),
         )
       ],
       child: MaterialApp(

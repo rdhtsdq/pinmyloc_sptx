@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/constant/colors.dart';
 import 'package:frontend/constant/text.dart';
 import 'package:frontend/constant/text_style.dart';
-import 'package:frontend/view/login/login_view.dart';
+import 'package:frontend/controller/any/any.dart';
+import 'package:frontend/model/menu.dart';
 import 'package:frontend/view/main_view.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -14,12 +16,17 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(seconds: 3)).then(
-        (value) => Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MainView(),
-            ),
-            (route) => false),
+        (value) {
+          context.read<ViewCubit>().setView(
+                Menu(title: "Dashboard", id: "DASH000"),
+              );
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MainView(),
+              ),
+              (route) => false);
+        },
       );
     });
 

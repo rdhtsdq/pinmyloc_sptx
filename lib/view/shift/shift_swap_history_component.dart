@@ -21,9 +21,11 @@ class _ShiftSwapHistoryComponentState extends State<ShiftSwapHistoryComponent> {
   @override
   void initState() {
     super.initState();
-    context
-        .read<ViewSettingCubit>()
-        .setSetting(ViewSetting(padding: const EdgeInsets.all(0)));
+    context.read<ViewSettingCubit>().setSetting(
+          ViewSetting(
+            padding: const EdgeInsets.all(0),
+          ),
+        );
   }
 
   @override

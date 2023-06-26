@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/components/bottom_sheet.dart';
 import 'package:frontend/components/card.dart';
 import 'package:frontend/components/divider.dart';
 import 'package:frontend/components/search.dart';
@@ -17,12 +18,64 @@ class OvertimeComponent extends StatefulWidget {
 }
 
 class _OvertimeComponentState extends State<OvertimeComponent> {
+  late MyBottomSheet sheet;
+
   @override
   void initState() {
     super.initState();
+    sheet = MyBottomSheet(context);
     context.read<ViewSettingCubit>().setSetting(
           ViewSetting(
             padding: const EdgeInsets.all(0),
+            isHead: true,
+            fabChild: const Icon(
+              Icons.add_rounded,
+            ),
+            children: [
+              Row(
+                children: [
+                  const Text(
+                    "Ajukan Lembur Pegawai",
+                    style: TextStyle(fontSize: MyTextStyle.tiny),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  FloatingActionButton(
+                    onPressed: () {
+                      // sheet.showFullSheet(
+                      // buildForm(ServiceFormType.head),
+                      // );
+                    },
+                    backgroundColor: MyColor.primary,
+                    child: const Icon(
+                      Iconsax.people,
+                      color: MyColor.base,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text(
+                    "Ajukan Lembur",
+                    style: TextStyle(fontSize: MyTextStyle.tiny),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  FloatingActionButton(
+                    onPressed: () {
+                      // sheet.showFullSheet(
+                      //   buildForm(ServiceFormType.employee),
+                      // );
+                    },
+                    backgroundColor: MyColor.primary,
+                    child: const Icon(Iconsax.edit, color: MyColor.base),
+                  ),
+                ],
+              ),
+            ],
           ),
         );
   }
