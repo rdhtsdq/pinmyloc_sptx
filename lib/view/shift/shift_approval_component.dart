@@ -46,82 +46,90 @@ class _ShiftApprovalComponentState extends State<ShiftApprovalComponent> {
           searchText: "Cari nama",
         ),
         Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
-            itemBuilder: (context, index) => MyCard(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-              margin: const EdgeInsets.only(bottom: 15),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Iconsax.calendar_1,
-                            color: MyColor.textFaded.shade400,
-                            size: 20,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
+          child: RefreshIndicator(
+            onRefresh: () async =>
+                Future.delayed(const Duration(seconds: 3)).then((value) {
+              print("object");
+            }),
+            child: ListView.builder(
+              padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
+              itemBuilder: (context, index) => MyCard(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                margin: const EdgeInsets.only(bottom: 15),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Iconsax.calendar_1,
+                              color: MyColor.textFaded.shade400,
+                              size: 20,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Rabu, ${(index + 1).toString().padLeft(2, '0')} Mei 2023",
+                              style: TextStyle(
+                                fontSize: MyTextStyle.small,
+                                fontWeight: MyTextStyle.bold,
+                                color: MyColor.textFaded.shade700,
+                              ),
+                            )
+                          ],
+                        ),
+                        if (index.isEven && index % 2 == 0)
                           Text(
-                            "Rabu, 02 Mei 2023",
+                            "Diterima",
                             style: TextStyle(
-                              fontSize: MyTextStyle.small,
+                              color: MyColor.green,
+                              fontSize: MyTextStyle.tiny,
                               fontWeight: MyTextStyle.bold,
-                              color: MyColor.textFaded.shade700,
                             ),
                           )
-                        ],
-                      ),
-                      if (index.isEven && index % 2 == 0)
-                        Text(
-                          "Diterima",
-                          style: TextStyle(
-                            color: MyColor.green,
-                            fontSize: MyTextStyle.tiny,
-                            fontWeight: MyTextStyle.bold,
+                      ],
+                    ),
+                    const Mydivider(),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        shiftComponent("Pegawai X", "07.00 - 16.00"),
+                        MyCard(
+                          padding: const EdgeInsets.all(5),
+                          child: Icon(
+                            Iconsax.repeat,
+                            size: 20,
+                            color: MyColor.textFaded.shade700,
+                            grade: 30,
                           ),
-                        )
-                    ],
-                  ),
-                  const Mydivider(),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      shiftComponent("Pegawai X", "07.00 - 16.00"),
-                      MyCard(
-                        padding: const EdgeInsets.all(5),
-                        child: Icon(
-                          Iconsax.repeat,
-                          size: 20,
-                          color: MyColor.textFaded.shade700,
-                          grade: 30,
                         ),
+                        shiftComponent("Pegawai Y", "15.00 - 21.00"),
+                      ],
+                    ),
+                    if (index.isOdd) ...[
+                      const SizedBox(
+                        height: 20,
                       ),
-                      shiftComponent("Pegawai Y", "15.00 - 21.00"),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  if (index.isOdd)
-                    Btn(
-                      text: "Konfirmasi",
-                      backgroundColor: MyColor.primary,
-                      onPressed: () => showConfirm(),
-                      textColor: MyColor.base,
-                      height: 35,
-                    )
-                ],
+                      Btn(
+                        text: "Konfirmasi",
+                        backgroundColor: MyColor.primary,
+                        onPressed: () => showConfirm(),
+                        textColor: MyColor.base,
+                        height: 35,
+                      )
+                    ]
+                  ],
+                ),
               ),
+              itemCount: 10,
             ),
-            itemCount: 10,
           ),
         )
       ],

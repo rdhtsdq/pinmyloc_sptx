@@ -48,6 +48,8 @@ dependencies:
   iconsax: ^0.0.8
   flutter_dash: ^1.0.0
   flutter_expandable_fab: ^1.8.1
+  another_stepper: ^1.2.2
+  unique_identifier: ^0.3.0
 
 dev_dependencies:
   flutter_test:

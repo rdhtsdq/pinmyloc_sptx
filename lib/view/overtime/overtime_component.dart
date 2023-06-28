@@ -30,6 +30,7 @@ class _OvertimeComponentState extends State<OvertimeComponent> {
             isHead: true,
             fabChild: const Icon(
               Icons.add_rounded,
+              color: MyColor.base,
             ),
             children: [
               Row(
@@ -88,54 +89,57 @@ class _OvertimeComponentState extends State<OvertimeComponent> {
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         ),
         Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            itemBuilder: (context, index) => MyCard(
-              margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Iconsax.calendar_1,
-                        size: 20,
-                        color: MyColor.textFaded.shade400,
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "${(index + 1).toString().padLeft(2, '0')} Juni 2023",
-                        style: TextStyle(
-                          fontSize: MyTextStyle.small,
-                          color: MyColor.textFaded.shade700,
+          child: RefreshIndicator(
+            onRefresh: () => Future.delayed(const Duration(seconds: 4)),
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              itemBuilder: (context, index) => MyCard(
+                margin: const EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Iconsax.calendar_1,
+                          size: 20,
+                          color: MyColor.textFaded.shade400,
                         ),
-                      )
-                    ],
-                  ),
-                  const Mydivider(),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Icon(
-                    Iconsax.login,
-                    size: 20,
-                    color: MyColor.primary.shade400,
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Icon(
-                    Iconsax.logout,
-                    size: 20,
-                    color: MyColor.accent.shade400,
-                  ),
-                ],
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        Text(
+                          "${(index + 1).toString().padLeft(2, '0')} Juni 2023",
+                          style: TextStyle(
+                            fontSize: MyTextStyle.small,
+                            color: MyColor.textFaded.shade700,
+                          ),
+                        )
+                      ],
+                    ),
+                    const Mydivider(),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Icon(
+                      Iconsax.login,
+                      size: 20,
+                      color: MyColor.primary.shade400,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Icon(
+                      Iconsax.logout,
+                      size: 20,
+                      color: MyColor.accent.shade400,
+                    ),
+                  ],
+                ),
               ),
+              itemCount: 10,
             ),
-            itemCount: 10,
           ),
         )
       ],

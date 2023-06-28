@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/view/attendance/attendance_component.dart';
 import 'package:frontend/view/dashboard/dashboard_component.dart';
-import 'package:frontend/view/history/history_component.dart';
+import 'package:frontend/view/attendance/history_component.dart';
 import 'package:frontend/view/overtime/overtime_approval_component.dart';
 import 'package:frontend/view/overtime/overtime_component.dart';
 import 'package:frontend/view/profile/profile_component.dart';
@@ -13,7 +14,8 @@ import 'package:frontend/view/shift/shift_swap_history_component.dart';
 class View {
   static final views = {
     "DASH000": const DashboardComponents(),
-    "ABSN001": const HistoryComponents(),
+    "ABSN001": const AttendanceComponent(),
+    "ABSN002": const HistoryComponents(),
     "SHFT001": const ShiftComponent(),
     "SHFT002": const ShiftSwapHistoryComponent(),
     "SHFT003": const ShiftApprovalComponent(),

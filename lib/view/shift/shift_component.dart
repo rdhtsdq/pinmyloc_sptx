@@ -52,74 +52,77 @@ class _ShiftComponentState extends State<ShiftComponent> {
             searchText: "Cari Tanggal",
             margin: const EdgeInsets.fromLTRB(15, 10, 15, 15)),
         Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            itemBuilder: (context, index) {
-              return MyCard(
-                padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
-                margin: const EdgeInsets.only(bottom: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Iconsax.calendar_1,
-                              size: 20,
-                              color: MyColor.textFaded.shade500,
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "${(index + 1).toString().padLeft(2, '0')} Juni 2023",
-                              style: const TextStyle(
-                                fontWeight: MyTextStyle.bold,
-                                fontSize: MyTextStyle.subTitle3,
+          child: RefreshIndicator(
+            onRefresh: () => Future.delayed(const Duration(seconds: 4)),
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              itemBuilder: (context, index) {
+                return MyCard(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
+                  margin: const EdgeInsets.only(bottom: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Iconsax.calendar_1,
+                                size: 20,
+                                color: MyColor.primary.shade400,
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Iconsax.clock,
-                              size: 20,
-                              color: MyColor.textFaded.shade500,
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "16.00 - 01.00",
-                              style: TextStyle(
-                                fontWeight: MyTextStyle.bold,
-                                color: MyColor.textFaded.shade600,
+                              const SizedBox(
+                                width: 20,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                      onPressed: () => showSelector(),
-                      icon: Icon(
-                        Iconsax.repeat,
-                        color: MyColor.textFaded.shade600,
-                        size: 20,
+                              Text(
+                                "${(index + 1).toString().padLeft(2, '0')} Juni 2023",
+                                style: const TextStyle(
+                                  fontWeight: MyTextStyle.bold,
+                                  fontSize: MyTextStyle.subTitle3,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Iconsax.clock,
+                                size: 20,
+                                color: MyColor.accent.shade400,
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                "16.00 - 01.00",
+                                style: TextStyle(
+                                  fontWeight: MyTextStyle.bold,
+                                  color: MyColor.textFaded.shade600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              );
-            },
-            itemCount: 25,
+                      IconButton(
+                        onPressed: () => showSelector(),
+                        icon: Icon(
+                          Iconsax.repeat,
+                          color: MyColor.textFaded.shade600,
+                          size: 20,
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+              itemCount: 25,
+            ),
           ),
         ),
       ],

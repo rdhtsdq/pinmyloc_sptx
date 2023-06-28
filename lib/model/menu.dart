@@ -25,14 +25,14 @@ class SubMenu {
 
 final List<Menu> menus = [
   Menu(id: "DASH000", title: "Dashboard"),
-  Menu(
-      id: "ABSN000",
-      title: "Absen Kerja",
-      submenu: [SubMenu(id: "ABSN001", title: "Riwayat Absen")]),
+  Menu(id: "ABSN000", title: "Absen Kerja", submenu: [
+    SubMenu(id: "ABSN001", title: "Absen"),
+    SubMenu(id: "ABSN002", title: "Riwayat Absensi")
+  ]),
   Menu(id: "SHFT00", title: "Shift", submenu: [
     SubMenu(id: "SHFT001", title: "Jadwal Shift"),
     SubMenu(id: "SHFT002", title: "Riwayat Tukar Shift"),
-    SubMenu(id: "SHFT002", title: "Persetujuan Tukar Shift"),
+    SubMenu(id: "SHFT003", title: "Persetujuan Tukar Shift"),
   ]),
   Menu(id: "LMBR000", title: "Lembur", submenu: [
     SubMenu(id: "LMBR001", title: "Lembur"),

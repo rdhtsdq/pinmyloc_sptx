@@ -35,6 +35,45 @@ class MyButton extends StatelessWidget {
       ),
     );
   }
+
+  static Widget small(
+      {required Function()? onTap,
+      required Color color,
+      required Color textColor,
+      required String text,
+      EdgeInsetsGeometry margin = const EdgeInsets.only(bottom: 20),
+      EdgeInsetsGeometry padding =
+          const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      double? width}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: MyCard(
+        margin: margin,
+        padding: padding,
+        color: color,
+        width: width,
+        noShadow: true,
+        alignment: Alignment.center,
+        child: width != null
+            ? FittedBox(
+                child: Text(
+                  text,
+                  style: TextStyle(
+                      fontSize: MyTextStyle.subTitle3,
+                      color: textColor,
+                      fontWeight: MyTextStyle.semiBold),
+                ),
+              )
+            : Text(
+                text,
+                style: TextStyle(
+                    fontSize: MyTextStyle.subTitle3,
+                    color: textColor,
+                    fontWeight: MyTextStyle.semiBold),
+              ),
+      ),
+    );
+  }
 }
 
 @immutable

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/components/divider.dart';
-import 'package:frontend/constant/colors.dart';
-import 'package:frontend/constant/text_style.dart';
-import 'package:frontend/controller/any/any.dart';
-import 'package:frontend/model/view_setting.dart';
+import '../../components/divider.dart';
+import '../../constant/colors.dart';
+import '../../constant/text_style.dart';
+import '../../controller/any/any.dart';
+import '../../model/view_setting.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileComponent extends StatelessWidget {

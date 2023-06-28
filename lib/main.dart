@@ -8,7 +8,8 @@ import './controller/bloc/login_bloc.dart';
 import './view/login/login_view.dart';
 import './view/splash.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ViewCubit(),
-        )
+        ),
       ],
       child: MaterialApp(
         title: 'Pinmyloc',
