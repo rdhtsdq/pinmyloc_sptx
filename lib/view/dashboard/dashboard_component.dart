@@ -1,11 +1,9 @@
-import 'package:another_stepper/another_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/components/bottom_sheet.dart';
 import 'package:frontend/components/button.dart';
 import 'package:frontend/constant/size.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../components/card.dart';
 import '../../constant/colors.dart';
@@ -26,6 +24,7 @@ class DashboardComponents extends StatelessWidget {
           borderRadius: BorderRadius.circular(MySize.checkRadius)),
     );
 
+    //set view setting
     context.read<ViewSettingCubit>().setSetting(
           ViewSetting(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),

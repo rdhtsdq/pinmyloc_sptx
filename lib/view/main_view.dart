@@ -29,7 +29,6 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return BlocBuilder<ViewSettingCubit, ViewSetting>(
       builder: (context, state) {
-        print(state.padding.toString());
         return BlocBuilder<ViewCubit, Menu>(
           builder: (context, view) {
             return Scaffold(

@@ -27,88 +27,93 @@ class _AttendanceComponentState extends State<AttendanceComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BlocBuilder<SelectedCubit, DateTime>(
-          builder: (context, selected) {
-            return BlocBuilder<FocusedCubit, DateTime>(
-              builder: (context, focused) {
-                return MyCard(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: TableCalendar(
-                    locale: 'id',
-                    focusedDay: focused,
-                    firstDay: DateTime(2020),
-                    lastDay: DateTime.now().add(const Duration(days: 30)),
-                    availableGestures: AvailableGestures.none,
-                    selectedDayPredicate: (day) {
-                      return isSameDay(selected, day);
-                    },
-                    onDaySelected: (selectedDay, focusedDay) {
-                      context.read<FocusedCubit>().setDate(focusedDay);
-                      context.read<SelectedCubit>().setDate(selectedDay);
-                    },
-                    weekendDays: const [7],
-                    calendarStyle: CalendarStyle(
-                      markerDecoration: const BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
+    return SingleChildScrollView(
+      clipBehavior: Clip.none,
+      child: Column(
+        children: [
+          BlocBuilder<SelectedCubit, DateTime>(
+            builder: (context, selected) {
+              return BlocBuilder<FocusedCubit, DateTime>(
+                builder: (context, focused) {
+                  return MyCard(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: TableCalendar(
+                      locale: 'id',
+                      focusedDay: focused,
+                      firstDay: DateTime(2020),
+                      lastDay: DateTime.now().add(const Duration(days: 30)),
+                      availableGestures: AvailableGestures.none,
+                      selectedDayPredicate: (day) {
+                        return isSameDay(selected, day);
+                      },
+                      onDaySelected: (selectedDay, focusedDay) {
+                        context.read<FocusedCubit>().setDate(focusedDay);
+                        context.read<SelectedCubit>().setDate(selectedDay);
+                      },
+                      weekendDays: const [7],
+                      calendarStyle: CalendarStyle(
+                        markerDecoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        isTodayHighlighted: true,
+                        selectedDecoration: const BoxDecoration(
+                          color: MyColor.primary,
+                          shape: BoxShape.circle,
+                        ),
+                        todayDecoration: BoxDecoration(
+                          color: MyColor.secondary,
+                          shape: BoxShape.circle,
+                        ),
+                        defaultTextStyle: const TextStyle(
+                          fontSize: 15,
+                        ),
+                        weekendTextStyle:
+                            const TextStyle(fontSize: 15, color: Colors.red),
                       ),
-                      isTodayHighlighted: true,
-                      selectedDecoration: const BoxDecoration(
-                        color: MyColor.primary,
-                        shape: BoxShape.circle,
+                      currentDay: DateTime.now(),
+                      headerStyle: const HeaderStyle(
+                        formatButtonVisible: false,
+                        leftChevronVisible: false,
+                        rightChevronVisible: false,
+                        titleTextStyle: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                        headerPadding: EdgeInsets.only(
+                          left: 15,
+                          right: 15,
+                          top: 3,
+                          bottom: 8,
+                        ),
                       ),
-                      todayDecoration: BoxDecoration(
-                        color: MyColor.secondary,
-                        shape: BoxShape.circle,
-                      ),
-                      defaultTextStyle: const TextStyle(
-                        fontSize: 15,
-                      ),
-                      weekendTextStyle:
-                          const TextStyle(fontSize: 15, color: Colors.red),
                     ),
-                    currentDay: DateTime.now(),
-                    headerStyle: const HeaderStyle(
-                      formatButtonVisible: false,
-                      leftChevronVisible: false,
-                      rightChevronVisible: false,
-                      titleTextStyle:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                      headerPadding: EdgeInsets.only(
-                        left: 15,
-                        right: 15,
-                        top: 3,
-                        bottom: 8,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            );
-          },
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildScheduleToday(
-                false, "08.00", "Gestalt Center", "Masuk", () {}, context),
-            buildDash(),
-            buildScheduleToday(
-                true, "Tunggu", "-", "Istirahat", () {}, context),
-            buildDash(),
-            buildScheduleToday(false, "Tunggu", "-", "Selesai", () {}, context),
-            buildDash(),
-            buildScheduleToday(false, "Tunggu", "-", "Pulang", () {}, context),
-          ],
-        ),
-        // buildScheduleToday(false, "08.00", "Gestalt Center", "Absen", () {}, context),
-      ],
+                  );
+                },
+              );
+            },
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              buildScheduleToday(
+                  false, "08.00", "Gestalt Center", "Masuk", () {}, context),
+              buildDash(),
+              buildScheduleToday(
+                  true, "Tunggu", "-", "Istirahat", () {}, context),
+              buildDash(),
+              buildScheduleToday(
+                  false, "Tunggu", "-", "Selesai", () {}, context),
+              buildDash(),
+              buildScheduleToday(
+                  false, "Tunggu", "-", "Pulang", () {}, context),
+            ],
+          ),
+          // buildScheduleToday(false, "08.00", "Gestalt Center", "Absen", () {}, context),
+        ],
+      ),
     );
   }
 

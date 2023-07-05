@@ -10,6 +10,8 @@ import 'package:frontend/view/service/service_component.dart';
 import 'package:frontend/view/shift/shift_approval_component.dart';
 import 'package:frontend/view/shift/shift_component.dart';
 import 'package:frontend/view/shift/shift_swap_history_component.dart';
+import 'package:frontend/view/task/report_task_component.dart';
+import 'package:frontend/view/task/task_component.dart';
 
 class View {
   static final views = {
@@ -21,8 +23,8 @@ class View {
     "SHFT003": const ShiftApprovalComponent(),
     "LMBR001": const OvertimeComponent(),
     "LMBR002": const OvertimeApprovalComponent(),
-    "TSKL001": Container(),
-    "TSKL002": Container(),
+    "TSKL001": const TaskComponent(),
+    "TSKL002": const ReportTaskComponent(),
     "DNSK001": const ServiceComponent(),
     "DNSK002": const ServiceApprovalComponents(),
     "IZNK000": Container(),
